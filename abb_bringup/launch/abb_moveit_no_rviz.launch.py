@@ -156,6 +156,21 @@ def launch_setup(context, *args, **kwargs):
         output="both",
         parameters=[robot_description],
     )
+    
+    waypt_streaming_node = Node(
+    	package="joint_traj_compliance_controller",
+    	executable="waypoint_streaming_node",
+    	name="fuckboi",
+    	parameters=[
+    	    	robot_description,
+    	    	robot_description_semantic,
+		kinematics_yaml,
+		ompl_planning_pipeline_config,
+		trajectory_execution,
+		moveit_controllers,
+		planning_scene_monitor_parameters
+	],
+     )
 
     nodes_to_start = [move_group_node, static_tf_node, robot_state_pub_node]
     return nodes_to_start
