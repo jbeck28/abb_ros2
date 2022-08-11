@@ -149,8 +149,20 @@ std::vector<hardware_interface::StateInterface> ABBSystemPositionOnlyHardware::e
       {
         // TODO(seng): Consider changing joint names in robot description to match what comes
         // from the ABB robot description to avoid needing to strip the prefix here
-        const auto pos = joint.name.find("joint");
-        const auto joint_name = joint.name.substr(pos);
+	const auto pos1 = joint.name.find("joint");
+	std::string joint_name = joint.name.substr(pos1);
+        if(std::string::npos == joint.name.find("rob")){
+          // in this situation we can't find "rob", meaning this is certainly an external axis mechanical group.
+          // So I guess we want to prefix this joint with "ext_"
+          
+          joint_name = std::string("ext_") + std::string(joint_name);
+        }else{
+          const auto pos = joint.name.find("rob");
+          joint_name = joint.name.substr(pos);
+        }
+        
+        /*std::cout <<"Unstripped joint name: " << joint.name << std::endl;
+        std::cout <<"Stripped joint name: " << joint_name << std::endl;*/
         state_interfaces.emplace_back(
             hardware_interface::StateInterface(joint_name, hardware_interface::HW_IF_POSITION, &joint.state.position));
         state_interfaces.emplace_back(
@@ -172,8 +184,19 @@ std::vector<hardware_interface::CommandInterface> ABBSystemPositionOnlyHardware:
       {
         // TODO(seng): Consider changing joint names in robot description to match what comes
         // from the ABB robot description to avoid needing to strip the prefix here
-        const auto pos = joint.name.find("joint");
-        const auto joint_name = joint.name.substr(pos);
+        const auto pos1 = joint.name.find("joint");
+        std::string joint_name = joint.name.substr(pos1);
+        if(std::string::npos == joint.name.find("rob")){
+          // in this situation we can't find "rob", meaning this is certainly an external axis mechanical group.
+          // So I guess we want to prefix this joint with "ext_"
+          joint_name = std::string("ext_") + std::string(joint_name);
+        }else{
+	  const auto pos = joint.name.find("rob");
+	  joint_name = joint.name.substr(pos);
+        }
+        
+        /*std::cout <<"Unstripped joint name: " << joint.name << std::endl;
+        std::cout <<"Stripped joint name: " << joint_name << std::endl;*/
         command_interfaces.emplace_back(hardware_interface::CommandInterface(
             joint_name, hardware_interface::HW_IF_POSITION, &joint.command.position));
         command_interfaces.emplace_back(hardware_interface::CommandInterface(
