@@ -50,7 +50,11 @@
     <disable_collisions link1="link_5" link2="link_6" reason="Adjacent"/>
     <disable_collisions link1="link_5" link2="toolFrame" reason="Never"/>
     <disable_collisions link1="link_6" link2="toolFrame" reason="Adjacent"/>
-
+    <disable_collisions link1="base_link" link2="panels" reason="Adjacent"/>
+    <disable_collisions link1="base_link" link2="table" reason="Adjacent"/>
+    <disable_collisions link1="extax_link" link2="panels" reason="Never"/>
+    <disable_collisions link1="extax_link" link2="table" reason="Default"/>
+    <disable_collisions link1="panels" link2="table" reason="Default"/>
   </xacro:macro>
 
 </robot>
