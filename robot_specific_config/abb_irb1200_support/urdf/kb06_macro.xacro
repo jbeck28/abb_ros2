@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:macro name="kb06" params="prefix">
+        <link name="table">
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/kb06_base_no_chuck.stl"/>
+                </geometry>
+            </collision>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/kb06_base_no_chuck.stl"/>
+                </geometry>
+                <xacro:material_abb_leaf_green/>
+            </visual>
+        </link>
+
+        <link name="panels">
+            <collision name="collision">
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/panels_oversized.stl"/>
+                </geometry>
+            </collision>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/panels_oversized.stl"/>
+                </geometry>
+                <material name="">
+                    <color rgba="0.5 0.5 0.5 0.2"/>
+                </material>
+                <!--xacro:material_abb_clear /-->
+            </visual>
+        </link>
+
+        <link name="${prefix}extax_link">
+            <inertial>
+                <mass value="0.137"/>
+                <origin xyz="0.6 0.150 0.0" rpy="0 0 0"/>
+                <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
+            </inertial>
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/3RChuckAsm.stl"/>
+                </geometry>
+            </collision>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/3RChuckAsm.stl"/>
+                </geometry>
+                <xacro:material_abb_pebble_gray/>
+            </visual>
+        </link>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:macro  name="kb04">
+        <link name="table">
+            <collision>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/kb04_Base_v3.stl"/>
+                </geometry>
+            </collision>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/kb04_Base_v3.stl"/>
+                </geometry>
+                <xacro:material_abb_pebble_gray/>
+            </visual>
+        </link>
+    </xacro:macro>
+</robot>

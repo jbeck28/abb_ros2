@@ -31,6 +31,7 @@ def launch_setup(context, *args, **kwargs):
     support_package = LaunchConfiguration("support_package")
     moveit_config_package = LaunchConfiguration("moveit_config_package")
     moveit_config_file = LaunchConfiguration("moveit_config_file")
+    # robot_station = LaunchConfiguration("robot_station")
 
     # Planning context
     robot_description_content = Command(
@@ -40,6 +41,10 @@ def launch_setup(context, *args, **kwargs):
             PathJoinSubstitution(
                 [FindPackageShare(support_package), "urdf", robot_xacro_file]
             ),
+            " ",
+            # "robot:=",
+            # robot_station,
+            # " ",
         ]
     )
     robot_description = {"robot_description": robot_description_content}
