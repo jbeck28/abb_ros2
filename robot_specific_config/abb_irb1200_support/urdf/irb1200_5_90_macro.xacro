@@ -2,18 +2,18 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
     <xacro:include filename="$(find abb_resources)/urdf/common_materials.xacro"/>
-    <xacro:include filename="kb06_macro.xacro"/>
-    <xacro:include filename="kb04-5_macro.xacro"/>
+    <xacro:include filename="$(find optimax_abb_robots)/urdf/ob03_macro.xacro"/>
+    <xacro:include filename="$(find optimax_abb_robots)/urdf/ob05_macro.xacro"/>
 
 <!--    <xacro:macro name="abb_irb1200_5_90" params="prefix">-->
     <xacro:macro name="abb_irb1200_5_90" params="prefix robot">
 
         <!-- Check which robot is being used and load in appropriate xacro file -->
         <xacro:property name="robot_property" value="${robot}"/>
-        <xacro:if value="${robot_property == 'kb06'}">
+        <xacro:if value="${robot_property == 'ob03'}">
             <xacro:kb06 prefix="${prefix}"/>
         </xacro:if>
-        <xacro:if value="${robot_property == 'kb04'}">
+        <xacro:if value="${robot_property == 'ob05'}">
             <xacro:kb04 prefix="${prefix}"/>
         </xacro:if>
 
