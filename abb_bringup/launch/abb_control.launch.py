@@ -94,7 +94,8 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "initial_joint_controller",
-            default_value="joint_traj_compliance_controller",
+            # default_value="joint_traj_compliance_controller",
+            default_value="joint_trajectory_controller",
             description="Robot controller to start.",
         )
     )
@@ -117,7 +118,7 @@ def generate_launch_description():
     rws_port = LaunchConfiguration("rws_port")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
-    # robot_station = LaunchConfiguration("robot_station")
+    robot_station = LaunchConfiguration("robot_station")
 
     robot_description_content = Command(
         [
@@ -142,9 +143,9 @@ def generate_launch_description():
             "rws_port:=",
             rws_port,
             " ",
-            # "robot:=",
-            # robot_station,
-            # " ",
+            "robot:=",
+            robot_station,
+            " ",
         ]
     )
     robot_description = {"robot_description": robot_description_content}

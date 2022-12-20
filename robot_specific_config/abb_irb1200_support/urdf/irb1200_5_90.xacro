@@ -6,12 +6,12 @@
         <xacro:property name="rws_ip" value="$(arg rws_ip)"/>
         <xacro:arg name="rws_port" default="80"/>
         <xacro:property name="rws_port" value="$(arg rws_port)"/>
-<!--        <xacro:arg name="robot" default=""/>-->
-<!--        <xacro:property name="robot" value="$(arg robot)"/>-->
-        <!-- Robot description -->
+        <xacro:arg name="robot" default=""/>
+        <xacro:property name="robot" value="$(arg robot)"/>
+<!--         Robot description-->
         <xacro:include filename="$(find abb_irb1200_support)/urdf/irb1200_5_90_macro.xacro"/>
-<!--        <xacro:abb_irb1200_5_90 prefix="" robot="${robot}"/>-->
-        <xacro:abb_irb1200_5_90 prefix=""/>
+        <xacro:abb_irb1200_5_90 prefix="" robot="${robot}"/>
+<!--        <xacro:abb_irb1200_5_90 prefix=""/>-->
 
         <!-- ros2_control -->
         <xacro:include filename="$(find abb_irb1200_support)/urdf/irb1200.ros2_control.xacro"/>

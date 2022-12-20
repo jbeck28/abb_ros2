@@ -158,7 +158,7 @@ def launch_setup(context, *args, **kwargs):
         parameters=[robot_description],
     )
 
-    nodes_to_start = [move_group_node, rviz_node, static_tf_node, robot_state_pub_node]
+    nodes_to_start = [rviz_node]
     return nodes_to_start
 
 

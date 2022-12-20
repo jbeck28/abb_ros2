@@ -5,72 +5,17 @@
     <xacro:include filename="kb06_macro.xacro"/>
     <xacro:include filename="kb04-5_macro.xacro"/>
 
-    <xacro:macro name="abb_irb1200_5_90" params="prefix">
-<!--    <xacro:macro name="abb_irb1200_5_90" params="prefix robot">-->
+<!--    <xacro:macro name="abb_irb1200_5_90" params="prefix">-->
+    <xacro:macro name="abb_irb1200_5_90" params="prefix robot">
 
-<!--        <xacro:property name="robot_property" value="${robot}"/>-->
-<!--        <xacro:if value="${robot_property == 'kb06'}">-->
-<!--            <xacro:kb06 prefix="${prefix}"/>-->
-<!--        </xacro:if>-->
-<!--        <xacro:if value="${robot_property == 'kb04'}">-->
-<!--            <xacro:kb04/>-->
-<!--        </xacro:if>-->
-
-        <link name="table">
-            <collision>
-                <origin rpy="0 0 0" xyz="0 0 0"/>
-                <geometry>
-                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/kb06_base_no_chuck.stl"/>
-                </geometry>
-            </collision>
-            <visual>
-                <origin rpy="0 0 0" xyz="0 0 0"/>
-                <geometry>
-                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/kb06_base_no_chuck.stl"/>
-                </geometry>
-                <xacro:material_abb_leaf_green/>
-            </visual>
-        </link>
-
-        <link name="panels">
-            <collision name="collision">
-                <origin rpy="0 0 0" xyz="0 0 0"/>
-                <geometry>
-                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/panels_oversized.stl"/>
-                </geometry>
-            </collision>
-            <visual>
-                <origin rpy="0 0 0" xyz="0 0 0"/>
-                <geometry>
-                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/panels_oversized.stl"/>
-                </geometry>
-                <material name="">
-                    <color rgba="0.5 0.5 0.5 0.2"/>
-                </material>
-                <!--xacro:material_abb_clear /-->
-            </visual>
-        </link>
-
-        <link name="${prefix}extax_link">
-            <inertial>
-                <mass value="0.137"/>
-                <origin xyz="0.6 0.150 0.0" rpy="0 0 0"/>
-                <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
-            </inertial>
-            <collision>
-                <origin rpy="0 0 0" xyz="0 0 0"/>
-                <geometry>
-                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/3RChuckAsm.stl"/>
-                </geometry>
-            </collision>
-            <visual>
-                <origin rpy="0 0 0" xyz="0 0 0"/>
-                <geometry>
-                    <mesh filename="package://abb_irb1200_support/meshes/irb1200_5_90/scene/3RChuckAsm.stl"/>
-                </geometry>
-                <xacro:material_abb_pebble_gray/>
-            </visual>
-        </link>
+        <!-- Check which robot is being used and load in appropriate xacro file -->
+        <xacro:property name="robot_property" value="${robot}"/>
+        <xacro:if value="${robot_property == 'kb06'}">
+            <xacro:kb06 prefix="${prefix}"/>
+        </xacro:if>
+        <xacro:if value="${robot_property == 'kb04'}">
+            <xacro:kb04 prefix="${prefix}"/>
+        </xacro:if>
 
         <link name="${prefix}base_link">
             <!-- See note 1 in package.xml about the inertial and mass values -->
@@ -273,14 +218,6 @@
             <limit effort="1000" lower="-6.283" upper="6.283" velocity="10.472"/>
             <dynamics damping="1.0" friction="1.0"/>
         </joint>
-        <joint type="continuous" name="${prefix}ext_joint_1">
-            <origin xyz="0.6096 0 0.100838" rpy="0 0 0"/>
-            <axis xyz="0 0 1"/>
-            <parent link="${prefix}base_link"/>
-            <child link="${prefix}extax_link"/>
-            <limit effort="1000" velocity="10.472"/>
-            <dynamics damping="1.0" friction="1.0"/>
-        </joint>
         <!-- end of joint list -->
 
         <!-- ROS-Industrial 'base' frame- base_link to ABB World Coordinates transform -->
@@ -307,16 +244,6 @@
             <child link="${prefix}tool0"/>
         </joint>
 
-        <joint name="${prefix}base_link-table" type="fixed">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <parent link="${prefix}base_link"/>
-            <child link="${prefix}table"/>
-        </joint>
 
-        <joint name="${prefix}base_link-panels" type="fixed">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-            <parent link="${prefix}base_link"/>
-            <child link="${prefix}panels"/>
-        </joint>
     </xacro:macro>
 </robot>
