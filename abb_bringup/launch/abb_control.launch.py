@@ -20,7 +20,7 @@ def generate_launch_description():
             default_value="abb_bringup",
             description='Package with the controller\'s configuration in "config" folder. \
         Usually the argument is not set, it enables use of a custom setup.',
-        )
+        ),
     )
     declared_arguments.append(
         DeclareLaunchArgument(
