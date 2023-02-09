@@ -19,7 +19,7 @@
 <!--                    <param name="egm_port">6511</param>-->
                     <!-- The following parameters are used for the MultiMove example only -->
                     <param name="rob1egm_port">6511</param>
-                    <param name="extaxegm_port">6512</param>
+<!--                    <param name="extaxegm_port">6512</param>-->
                 </xacro:unless>
             </hardware>
             <joint name="${prefix}rob1_joint_1">
@@ -88,7 +88,15 @@
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-
+            <joint name="${prefix}ext_joint_1">
+                <command_interface name="position">
+                </command_interface>
+                <command_interface name="velocity"/>
+                <state_interface name="position">
+                    <param name="initial_value">0.0</param>
+                </state_interface>
+                <state_interface name="velocity"/>
+            </joint>
         </ros2_control>
     </xacro:macro>
 

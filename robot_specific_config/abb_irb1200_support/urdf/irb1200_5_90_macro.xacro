@@ -4,18 +4,20 @@
     <xacro:include filename="$(find abb_resources)/urdf/common_materials.xacro"/>
     <xacro:include filename="$(find optimax_abb_robots)/urdf/ob03_macro.xacro"/>
     <xacro:include filename="$(find optimax_abb_robots)/urdf/ob05_macro.xacro"/>
+    <xacro:include filename="$(find optimax_abb_robots)/urdf/abb_extax.xacro"/>
 
 <!--    <xacro:macro name="abb_irb1200_5_90" params="prefix">-->
-    <xacro:macro name="abb_irb1200_5_90" params="prefix robot">
+    <xacro:macro name="abb_irb1200_5_90" params="prefix robot use_extax">
 
         <!-- Check which robot is being used and load in appropriate xacro file -->
         <xacro:property name="robot_property" value="${robot}"/>
         <xacro:if value="${robot_property == 'ob03'}">
-            <xacro:kb06 prefix="${prefix}"/>
+            <xacro:ob03 prefix="${prefix}" use_extax="${use_extax}"/>
         </xacro:if>
         <xacro:if value="${robot_property == 'ob05'}">
-            <xacro:kb04 prefix="${prefix}"/>
+            <xacro:ob05 prefix="${prefix}"/>
         </xacro:if>
+
 
         <link name="${prefix}base_link">
             <!-- See note 1 in package.xml about the inertial and mass values -->

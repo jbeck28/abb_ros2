@@ -148,11 +148,11 @@ std::vector<hardware_interface::StateInterface> ABBSystemPositionOnlyHardware::e
       for (auto& joint : unit.joints)
       {
         // TODO(seng): Consider changing joint names in robot description to match what comes
-        // from the ABB robot description to avoid needing to strip the prefix here
+        //  from the ABB robot description to avoid needing to strip the prefix here
 	const auto pos1 = joint.name.find("joint");
 	std::string joint_name = joint.name.substr(pos1);
 				std::cout <<"Size of group.units is: " << group.units.size() << std::endl;
-				if(group.units.size() >1){
+				if(motion_data_.groups.size() >1){
         if(std::string::npos == joint.name.find("rob")){
           // in this situation we can't find "rob", meaning this is certainly an external axis mechanical group.
           // So I guess we want to prefix this joint with "ext_"
@@ -191,7 +191,7 @@ std::vector<hardware_interface::CommandInterface> ABBSystemPositionOnlyHardware:
         // from the ABB robot description to avoid needing to strip the prefix here
         const auto pos1 = joint.name.find("joint");
         std::string joint_name = joint.name.substr(pos1);
-        if(group.units.size() > 1){
+        if(motion_data_.groups.size() > 1){
 					if(std::string::npos == joint.name.find("rob")){
 						// in this situation we can't find "rob", meaning this is certainly an external axis mechanical group.
 						// So I guess we want to prefix this joint with "ext_"
