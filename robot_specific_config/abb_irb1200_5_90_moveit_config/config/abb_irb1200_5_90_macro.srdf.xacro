@@ -64,19 +64,7 @@
         <disable_collisions link1="base_link" link2="table" reason="Adjacent"/>
         <disable_collisions link1="panels" link2="table" reason="Default"/>
 
-        <xacro:if value="${use_extax_property == True}">
-            <group name="extax">
-                <joint name="ext_joint_1"/>
-            </group>
-            <group_state name="zeros" group="extax">
-                <joint name="ext_joint_1" value="0"/>
-            </group_state>
-            <disable_collisions link1="extax_link" link2="panels" reason="Never"/>
-            <disable_collisions link1="extax_link" link2="table" reason="Default"/>
-        </xacro:if>
-        <xacro:if value="${use_extax_property == False}">
-            <disable_collisions link1="chuck" link2="table" reason="Default"/>
-        </xacro:if>
+
     </xacro:macro>
 
 </robot>

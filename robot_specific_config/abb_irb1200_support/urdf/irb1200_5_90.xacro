@@ -22,5 +22,7 @@
                 prefix=""
                 use_fake_hardware="${use_fake_hardware}"
                 rws_ip="${rws_ip}"
-                rws_port="${rws_port}"/>
+                rws_port="${rws_port}"
+                use_extax="${use_extax}"
+                robot="${robot}"/>
     </robot>

@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find optimax_abb_robots)/urdf/ob03_control_macro.xacro"/>
 
-    <xacro:macro name="abb_ros2_control" params="name prefix use_fake_hardware:=true rws_ip rws_port">
+    <xacro:macro name="abb_ros2_control" params="name prefix use_fake_hardware:=true rws_ip rws_port use_extax robot">
+        <xacro:property name="use_extax_property" value="${use_extax}"/>
+        <xacro:property name="robot_property" value="${robot}"/>
         <ros2_control name="${name}" type="system">
             <hardware>
                 <!-- ros2_control simulation -->
@@ -16,10 +19,14 @@
                     <param name="rws_port">${rws_port}</param>
                     <param name="rws_ip">${rws_ip}</param>
                     <!-- The following parameter is used for non-MultiMove only -->
-<!--                    <param name="egm_port">6511</param>-->
+                    <xacro:if value="${use_extax_property == False}">
+                        <param name="egm_port">6511</param>
+                    </xacro:if>
                     <!-- The following parameters are used for the MultiMove example only -->
-                    <param name="rob1egm_port">6511</param>
-                    <param name="extaxegm_port">6512</param>
+                    <xacro:if value="${use_extax_property == True}">
+                        <param name="rob1egm_port">6511</param>
+                        <param name="extaxegm_port">6512</param>
+                    </xacro:if>
                 </xacro:unless>
             </hardware>
             <joint name="${prefix}rob1_joint_1">
@@ -88,14 +95,11 @@
                 </state_interface>
                 <state_interface name="velocity"/>
             </joint>
-            <joint name="${prefix}ext_joint_1">
-                <command_interface name="position"/>
-                <command_interface name="velocity"/>
-                <state_interface name="position">
-                    <param name="initial_value">0.0</param>
-                </state_interface>
-                <state_interface name="velocity"/>
-            </joint>
+
+            <xacro:if value="${robot_property == 'ob03'}">
+                <xacro:ob03_control prefix="${prefix}"/>
+            </xacro:if>
+
         </ros2_control>
     </xacro:macro>
 
